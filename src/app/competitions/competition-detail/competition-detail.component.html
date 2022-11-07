@@ -1,0 +1,116 @@
+<h4>Competition Detail: {{competition.name}}</h4>
+<h5>General</h5>
+<div class="grid p-fluid mt-4">
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [(ngModel)]="competition.id" [disabled]="'disabled'"> 
+                <label for="float-input">Id</label>
+            </span> 
+        </div>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="competition.code" [disabled]="'disabled'"> 
+            <label for="float-input">Code</label>
+        </span> 
+    </div>
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [(ngModel)]="competition.type" [disabled]="'disabled'"> 
+                <label for="float-input">Type</label>
+            </span> 
+        </div>
+    </div>
+</div>
+<div class="grid p-fluid mt-4">
+    <div class="col-12 md:col-6">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [(ngModel)]="competition.emblem" [disabled]="'disabled'"> 
+                <label for="float-input">Emblem</label>
+            </span> 
+        </div>
+    </div>
+    <div class="col-12 md:col-6">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [(ngModel)]="competition.lastUpdated" [disabled]="'disabled'"> 
+                <label for="float-input">Last Updated</label>
+            </span> 
+        </div>
+    </div>
+</div>
+<h5>Current Season</h5>
+<div class="grid p-fluid mt-4">
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [(ngModel)]="competition.currentSeason.id" [disabled]="'disabled'"> 
+                <label for="float-input">Id</label>
+            </span> 
+        </div>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [ngModel]="competition.currentSeason.startDate | date:'dd/MM/yyyy'" [disabled]="'disabled'"> 
+            <label for="float-input">Start Date</label>
+        </span> 
+    </div>
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [ngModel]="competition.currentSeason.endDate | date:'dd/MM/yyyy'" [disabled]="'disabled'"> 
+                <label for="float-input">End Date</label>
+            </span> 
+        </div>
+    </div>
+</div>
+<div class="grid p-fluid mt-4">
+    <div class="col-12 md:col-6">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [(ngModel)]="competition.currentSeason.currentMatchday" [disabled]="'disabled'"> 
+                <label for="float-input">Current Match Day</label>
+            </span> 
+        </div>
+    </div>
+    <div class="col-12 md:col-6" *ngIf="competition.currentSeason.winner != null">
+        <div class="p-inputgroup">
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText [(ngModel)]="competition.currentSeason.winner.name" [disabled]="'disabled'"> 
+                <label for="float-input">Winner</label>
+            </span> 
+        </div>
+    </div>
+</div>
+<h5>Seasons</h5>
+<div *ngIf="competition.seasons != null && competition.seasons.length > 0">
+    <p-table [value]="competition.seasons" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Current Match Day</th>
+                <th>Winner</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-season>
+            <tr>
+                <td>{{season.id}}</td>
+                <td>{{season.startDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{season.endDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{season.currentMatchday}}</td>
+                <td *ngIf="season.winner != null">
+                    <strong>{{season.winner.name}}</strong>
+                </td>
+                <td *ngIf="season.winner == null">
+                    N/A
+                </td>
+                </tr>
+        </ng-template>
+    </p-table>
+</div>
+
